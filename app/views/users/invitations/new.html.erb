@@ -1,0 +1,30 @@
+<div class="banner-header">
+  <div class="d-flex align-items-center">
+    <div class="flex-grow-1">
+      <h2>Invite Users</h5>
+      <%= render_breadcrumbs %>
+    </div>
+  </div>
+</div>
+<div class="center-cards">
+  <div class="card mw-470">
+    <div class="card-body">
+      <h3 class="text-center">Send Invitation</h3>
+      <hr/>
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <div class="form-group form-floating">
+            <%= f.email_field field, placeholder: 'Enter Your Email', required: true %>
+            <label for="user_email">Enter Your Email</label>
+          </div>
+        <% end %>
+        <div class="form-group form-floating">
+          <%= f.select :role_ids, options_for_select(Role.all.map{ |r| [r.name.humanize(), r.id ] }), {prompt: 'Select Role' },{required: true} %>
+          <label for="user_role_ids">Select Role</label>
+        </div>
+        <%= f.submit t("devise.invitations.new.submit_button"), class:'btn-submit' %>
+      <% end %>
+    </div>
+  </div>
+</div>

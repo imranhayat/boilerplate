@@ -1,0 +1,75 @@
+<% if current_user.has_role? :admin %>
+  <div class="banner-header">
+    <div class="d-flex align-items-center">
+      <div class="flex-grow-1">
+        <h2><%= @user.name.present? ? @user.name.capitalize : 'User' %> Invoices</h2>
+        <%= render_breadcrumbs %>
+      </div>
+      <div class="flex-shrink-0 pl-2">
+        <% if can? :new, Plan %>
+          <%= link_to 'Back to all invoices', all_invoices_path, class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="container-lg py-4 py-lg-5">
+  <% if !current_user.has_role? :admin %>
+    <h2 class="text-center mb-4">My Invoices</h2>
+  <% end %>
+  <% if @invoices.present? %>
+    <div class="table-responsive no-datatable">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              Description
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Amount
+            </th>
+            <th>
+              Invoice
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invoices.each do |invoice| %>
+            <tr>
+              <% if invoice.status == 'paid' or invoice.status == 'open' %>
+                <td>
+                  <% invoice.lines.data.each do |d| %>
+                    <div>
+                      <%= d.description %>
+                    </div>
+                  <% end %>
+                  <div class="text-muted small">
+                    <%= Time.at(invoice.created).to_datetime.strftime('%d %B %Y (%A) at %H:%M %P') %>
+                  </div>
+                </td>
+                <td>
+                  <%= invoice.status.capitalize %>
+                </td>
+                <td>
+                  <%= number_to_currency((invoice.amount_paid)/100.00) %>
+                </td>
+                <td>
+                  <a target="_blank" href="<%= invoice.hosted_invoice_url %>" rel="noopener">
+                    <i class="fas fa-download">
+                  </i> Download</a>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+  <div class="text-center">
+    No Invoices currently present.
+  </div>
+  <% end %>
+</div>

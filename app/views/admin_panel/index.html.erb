@@ -1,0 +1,51 @@
+<div class="banner-header">
+  <div class="d-flex align-items-center">
+    <div class="flex-grow-1">
+      <h2>Admin Dashboard</h2>
+      <%= render_breadcrumbs %>
+    </div>
+  </div>
+</div>
+<div class="container-fluid py-4 statistics">
+  <h2 class="mb-4 text-center">Statistics</h2>
+  <div class="form-row text-center justify-content-center">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3">
+      <%= link_to admin_users_path do %>
+        <div class="card">
+          <div class="card-body">
+            <h3>TOTAL USERS</h3>
+            <div class="number"><%= User.total_normal_users %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h3>SUBSCRIBED USERS</h3>
+          <div class="number"><%= User.total_subscribed_users %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3">
+      <%= link_to plans_path do %>
+        <div class="card">
+          <div class="card-body">
+            <h3>PRICING PLANS</h3>
+            <div class="number"><%= Plan.count %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3">
+      <%= link_to all_invoices_path do %>
+        <div class="card">
+          <div class="card-body">
+            <h3>PAYMENT RECEIVED</h3>
+            <div class="number"><%= number_to_currency((User.all_stripe_invoices_amount_count)/100.00) %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

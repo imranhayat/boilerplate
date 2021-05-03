@@ -1,0 +1,585 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+@import "_variables";
+
+@import '~bootstrap/scss/bootstrap';
+
+// Custom Fonts
+// @font-face {
+//   font-family: 'Mont';
+//   src: url('/fonts/Mont-SemiBold.eot');
+//   src: url('/fonts/Mont-SemiBold.eot?#iefix') format('embedded-opentype'),
+//       url('/fonts/Mont-SemiBold.woff2') format('woff2'),
+//       url('/fonts/Mont-SemiBold.woff') format('woff'),
+//       url('/fonts/Mont-SemiBold.ttf') format('truetype'),
+//       url('/fonts/Mont-SemiBold.svg#Mont-SemiBold') format('svg');
+//   font-weight: 600;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// @font-face {
+//   font-family: 'Mont';
+//   src: url('/fonts/Mont-Bold.eot');
+//   src: url('/fonts/Mont-Bold.eot?#iefix') format('embedded-opentype'),
+//       url('/fonts/Mont-Bold.woff2') format('woff2'),
+//       url('/fonts/Mont-Bold.woff') format('woff'),
+//       url('/fonts/Mont-Bold.ttf') format('truetype'),
+//       url('/fonts/Mont-Bold.svg#Mont-Bold') format('svg');
+//   font-weight: bold;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// @font-face {
+//   font-family: 'Mont';
+//   src: url('/fonts/Mont-Regular.eot');
+//   src: url('/fonts/Mont-Regular.eot?#iefix') format('embedded-opentype'),
+//       url('/fonts/Mont-Regular.woff2') format('woff2'),
+//       url('/fonts/Mont-Regular.woff') format('woff'),
+//       url('/fonts/Mont-Regular.ttf') format('truetype'),
+//       url('/fonts/Mont-Regular.svg#Mont-Regular') format('svg');
+//   font-weight: normal;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+
+html{
+  scroll-behavior: smooth;
+}
+
+// Body Responsive Font Size
+
+// Body Responsive Font Size End
+
+// Responsive Font Size Mixin
+@mixin fontSize($size){
+  font-size: $size;
+  @media(max-width: 992px){
+    font-size: $size - 2px;
+  }
+  @media(max-width: 767px){
+    font-size: $size - 3.5px;
+  }
+}
+
+.fs-20 { @include fontSize(20px); }
+.fs-30 { @include fontSize(30px); }
+// Responsive Font Size Mixin End
+
+// Font Weight Mixin
+@mixin fw($weight){
+  font-weight: $weight;
+}
+
+.fw-100 { @include fw(100); }
+.fw-200 { @include fw(200); }
+.fw-300 { @include fw(300); }
+.fw-400 { @include fw(400); }
+.fw-500 { @include fw(500); }
+.fw-600 { @include fw(600); }
+.fw-700 { @include fw(700); }
+.fw-800 { @include fw(800); }
+.fw-900 { @include fw(900); }
+// Font Weight Mixin End
+
+//Footer
+footer{
+  font-size: $font-size-base;
+}
+
+.footer{
+  margin-top: auto;
+  padding: 15px 7px;
+  background-color: #fff;
+  border-top: $border-1;
+  text-align: center;
+}
+// Footer End
+
+// Form Fields
+input[type="email"], input[type="password"], input[type="text"], input[type="number"], input[type="file"], input[type="date"], input[type="datetime-local"], input[type="month"], input[type="url"], input[type="week"], input[type="search"], input[type="tel"], input[type="time"], select, textarea{
+  @extend .form-control;
+  box-shadow: none;
+  filter: none;
+}
+
+select{
+  @extend .custom-select;
+}
+
+textarea.form-control{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: $border-radius-sm;
+  height: auto;
+  min-height: 45px;
+}
+
+input[type="file"]{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.password_show .fas{
+  position: absolute;
+  line-height: 16px;
+  right: 22px;
+  top: calc(50% - 8px);
+  cursor: pointer;
+  font-size: 16px;
+  color: $primary;
+}
+
+.needs-validation .password_show .fas{
+  display: none;
+}
+
+select[multiple], .nav-tabs .nav-link, .nav-pills .nav-link, .alert, .badge, .list-group, .img-thumbnail{
+  border-radius: $border-radius-sm;
+}
+
+input[type="checkbox"], input[type="radio"]{
+  filter: hue-rotate(45deg);
+}
+
+.form-control:-webkit-autofill{
+  &, &:hover, &:focus{
+    -webkit-text-fill-color: $body-color;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  &::first-line {
+    font-family: $font-family-base;
+    font-size: $input-font-size;
+  }
+}
+
+.checkbox, .radio{
+  @extend .form-check, .custom-control;
+  
+  input[type="checkbox"], input[type="radio"]{
+    @extend .custom-control-input;
+  }
+
+  label{
+    @extend .custom-control-label;
+  }
+}
+
+.radio{
+  @extend .custom-radio;
+
+  .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+.custom-file-label{
+  @extend .text-truncate;
+}
+
+.checkbox{
+  @extend .custom-checkbox;
+
+  .custom-control-label::before {
+    border-radius: 2px;
+    transition: none;
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::after{
+    content: "\f00c";
+    font-weight: 900;
+    top: -1.01px;
+    left: -1.34rem;
+    font-size: 11px;
+    color: #fff;
+    font-family: $font-awesome;
+    background-image: none;
+  }
+
+  .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    background-color: #fff;
+    border-color: $primary;
+  }
+}
+
+.custom-control-label {
+  line-height: 25px;
+}
+
+@media (max-width: 399.98px) {
+  .input-group input {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+  }
+}
+// Form Fields End
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+
+  &-track{
+    background: transparent;
+  }
+
+  &-thumb{
+    background: transparent;
+    background-color: $primary ;
+    border-radius: 3px;
+  }
+}
+// Scrollbar End
+
+// Header
+.nav-link{
+  font-weight: $font-weight-bold;
+  font-size: 16px;
+}
+
+.navbar{
+  z-index: 1;
+  filter: $filter;
+}
+
+.navbar.bg-primary{
+  .nav-link{
+    color: #fff;
+  }
+  .navbar-brand{
+    color: #fff;
+  }
+}
+
+.dropdown-item i{
+  width: 22px;
+}
+
+.navbar-light .navbar-toggler {
+  border: 0;
+  padding: 0;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='3 2 24 25'%3e%3cpath stroke='%237D26CD' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+// Header End
+
+// Pricing
+.pricing-tabs{
+  .btn.active{
+    @extend .btn-primary;
+  }
+  
+  .btn{
+    @extend .btn-outline-primary
+  }
+} 
+
+.MyCardElement{
+  @extend .border, .p-3, .rounded-sm;
+}
+// Pricing End
+
+// Buttons
+.input-group-append .btn{
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+:focus, button:focus{
+  box-shadow: none !important;
+  outline: none;
+}
+
+.btn-link{
+  padding: 0;
+}
+
+.btn-block{
+  border-radius: $border-radius;
+}
+// Buttons End
+
+// Devise
+.page-center, .center-cards {
+  display: flex;
+  justify-content: center;
+
+  .card{
+    margin: 30px 0;
+    display: flex;
+    filter: $filter;
+  }
+
+  .card-body {
+    @extend .p-sm-50, .py-30, .px-3;
+  }
+
+  .devise-bg{
+    height: 100%;
+    background-image: url('/devise-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.page-center {
+  height: 100%;
+  align-items: center;
+}
+
+.btn-google, .btn-facebook {
+  display: flex;
+  align-items: center;
+  height: 45px;
+
+  .devise-social-icons{
+    display: inline-flex;
+    text-align: center;
+    height: 100%;
+    
+    img{
+      margin: auto;
+    }
+  }
+  .devise-social-text{
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: $font-family-poppins;
+  }
+}
+
+.btn-google{
+  border: 1px solid #4285f4;
+  background-color: #4285f4;
+  border-radius: 1px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+  -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+  transition: background-color .218s,border-color .218s,box-shadow .218s;
+
+  &:hover {
+    -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+  }
+
+  .devise-social-text{
+    font-weight: 600;
+   }
+
+  .devise-social-icons{
+    width: 45px;
+    background-color: #fff;
+
+    img{
+      width: 18px;
+    }
+  }
+}
+
+.btn-facebook {
+  border-radius: 4px;
+  background-color: #1877f2;
+
+  &:hover {
+    background-color: #166fe5;
+  }
+
+  .devise-social-icons img{
+    width: 24px;
+    margin-left: 9px;
+  }
+
+  .devise-social-text{
+   font-weight: 600;
+  }
+}
+
+.btn-submit {
+  @extend .btn, .btn-primary, .btn-lg, .btn-block;
+}
+
+// Devise End
+
+// Rails Errors Design
+#error_explanation ul{
+  padding-left: 20px;
+  margin-bottom: 15px;
+  color: $danger;
+}
+// Rails Errors Design End
+
+// Floating Labels
+.form-floating {
+  position: relative;
+}
+
+.form-floating > label {
+  color: $input-placeholder-color;
+  font-size: 14px;
+  position: absolute;
+  top: calc(22.5px - 10.5px);
+  left: 15px;
+  margin-bottom: 0;
+  pointer-events: none;
+  background-color: #fff;
+  padding: 0 5px;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-floating > label {
+    transition: none;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &::-moz-placeholder {@content}
+  &::placeholder {@content}
+}
+
+.form-floating > .form-control{
+  @include placeholder {
+    color: transparent;
+    opacity: 0;
+  }
+}
+
+@mixin placeholder_shown {
+  &:not(:-moz-placeholder-shown) ~ label {@content}
+  &:focus ~ label {@content}
+  &:not(:placeholder-shown) ~ label {@content}
+  &:-webkit-autofill ~ label {@content}
+}
+
+$floating-transform: scale(0.85) translateY(-1.5rem) translateX(0rem);
+
+.form-floating > .form-control{
+  @include placeholder_shown {
+    transform: $floating-transform;
+    color: $primary;
+    font-weight: $font-weight-bold;
+  }
+}
+// Floating Labels End
+
+// Modals
+.modal-header {
+  align-items: center;
+
+  h5{
+    font-size: 18px;
+  }
+
+  .close{
+    line-height: 0.5;
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+    font-family: auto;
+    color: $body-color;
+    float: none;
+  }
+}
+
+.modal-dialog{
+  @extend .modal-dialog-centered;
+}
+// Modals End
+
+// Width
+@mixin width($width) {
+  @media(min-width: $width){
+    width: $width;
+  }
+  @media(max-width: $width){
+    width: 100%;
+  }
+}
+
+.w-470 { @include width(470px); }
+.w-920 { @include width(920px); }
+
+.mw-470{
+  width: 470px;
+  max-width: 470px;
+}
+
+.mw-1000{
+  width: 1000px;
+  max-width: 1000px;
+}
+// Width End
+
+// Tables
+.table{
+  margin-bottom: 0;
+  background-color: #fff;
+  width: 100% !important;
+
+  th{
+    font-weight: $font-weight-bold;
+  }
+}
+// Tables End
+
+// Cards
+.card{
+  border-color: $border-color;
+}
+
+.card-header{
+  background-color: #fff;
+  border-bottom: $border-1;
+}
+// Cards End
+
+
+// Data Confirm Modal
+.btn.cancel{
+  @extend .btn-secondary;
+}
+// Data Confirm Modal End
+
+// Miscellaneous Designs
+.hidden{
+  display: none;
+}
+
+.btn .badge{
+  padding: 0.38em 0.3rem 0.1rem 0.4em !important;
+}
+
+@media(min-width: 992px){
+  .navbar{
+    .navbar-nav{
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+@media(max-width: 991.98px){
+  body{
+    font-size: $font-size-base - 0.1rem;
+  }
+}
+
+@media(max-width: 575.98px){
+  body{
+    font-size: $font-size-base - 0.15rem;
+  }
+}

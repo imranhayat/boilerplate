@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  
+  <head>
+    
+    <title>YourAppName</title>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="BoilerPlate for Rails Projects">
+    <meta name="author" content="System Plus">
+    <meta name="robots" content="index,follow">
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#7D26CD">
+    <link rel="icon" href="/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#7D26CD">
+    
+    <!-- All Fonts, CSS, JS Files, CDNs will be included in following partial -->
+    <%= render 'layouts/fonts_styles_scripts' %>
+    
+  </head>
+  
+  <% if !(user_signed_in?) %>
+    <div id="g_id_onload"
+      data-client_id="<%= ENV["Google_client_id"]%>"
+      data-login_uri="<%=root_url%>users/auth/google_oauth2"
+      data-auto_select="true"
+      data-model_type="User">
+    </div>
+  <% end %>
+
+  <body class="nav-fixed h-100 d-flex flex-column">
+    <% if user_signed_in? and current_user.has_role? :admin %>
+      <%= render 'layouts/header-dashboard' %>
+      <div id="layoutSidenav">
+        <%= render 'layouts/admin_sidebar' %>
+        <div id="layoutSidenav_content">
+          <main role="main">
+            <%= yield %>
+          </main>
+        </div>
+      </div>
+    <% else %>
+      <%= render 'layouts/header' if user_signed_in? %>
+      <main role="main" class="flex-shrink-0">
+        <%= yield %>
+      </main>
+      <%= render 'layouts/footer' if user_signed_in? %>
+    <% end %>
+    <%= render 'layouts/swal' %>
+    <%= render 'layouts/page_center_script' %>
+  </body>
+
+</html>

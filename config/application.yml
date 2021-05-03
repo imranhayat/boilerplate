@@ -1,0 +1,4 @@
+# Stripe
+  PUBLISHABLE_KEY: 'pk_test_IVfJ4IUb4j3umj35w5OTLu7D'
+  SECRET_KEY: 'sk_test_yBRWJa8Nrhu3a9eppHh3ITY0'
+  STRIPE_ENDPOINT_SECRET: 'whsec_yHJ0yxfUl0d93guIctXBVwSqmwtR5JMr'

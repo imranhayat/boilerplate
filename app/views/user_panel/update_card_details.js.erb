@@ -1,0 +1,17 @@
+var stripe = Stripe("<%= ENV['PUBLISHABLE_KEY'] %>");
+<% if @response.success? %>
+  stripe.redirectToCheckout
+    (
+      {
+        sessionId: "<%= @response.session.id %>"
+      }
+    )
+    .then(
+      function(result)
+        {
+          alert(result.error.message);
+        }
+      );
+<% else %>
+  alert('Error: <%= @response.message %>');
+<% end %>

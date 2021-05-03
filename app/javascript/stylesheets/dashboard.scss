@@ -1,0 +1,253 @@
+@import "_variables";
+
+// Dashboard
+.banner-header{
+  background-color: #fff;
+  padding: 15px;
+  border-bottom: $border-1;
+}
+
+#layoutSidenav {
+  display: flex;
+
+  #layoutSidenav_nav {
+    flex-basis: $sidebar-width;
+    flex-shrink: 0;
+    transition: transform 0.15s ease-in-out;
+    z-index: 1038;
+    transform: translateX(-$sidebar-width);
+  }
+
+  #layoutSidenav_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    flex-grow: 1;
+    min-height: $dashboard-height;
+    margin-left: -$sidebar-width;
+  }
+}
+
+.sidenav-toggled #layoutSidenav {
+  #layoutSidenav_nav {
+    transform: translateX(0);
+  }
+  
+  #layoutSidenav_content:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1037;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+
+@media (min-width: 992px) {
+  #layoutSidenav {
+
+    #layoutSidenav_nav {
+      transform: translateX(0);
+    }
+
+    #layoutSidenav_content {
+      margin-left: 0;
+    }
+  }
+  
+  .sidenav-toggled #layoutSidenav {
+    .collapse{
+      display: block;
+    }
+
+    #layoutSidenav_nav {
+      flex-basis: $sidebar-width-collapsed;
+      transform: translateX(0);
+      
+      .nav-link{
+        flex-direction: column;
+        padding: 10px 5px;
+      }
+
+      .nav-link span{
+        font-size: 11.7px;
+      }
+
+      .nav-link .sidenav-collapse-arrow{
+        display: none;
+      }
+
+      .nav-link{
+        text-align: center;
+        justify-content: center;
+      }
+
+      .nav-link-icon{
+        margin-right: 0;
+      }
+
+      .sidenav-menu-nested {
+        margin-left: 0;
+      }
+    }
+
+    #layoutSidenav_content {
+      margin-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+.nav-fixed {
+  .topnav {
+    z-index: 1039;
+  }
+  
+  #layoutSidenav #layoutSidenav_nav {
+    transition: 0.4s linear;
+    width: $sidebar-width;
+    background: #fff;
+    border-right: 1px solid #d1d1d1;
+    z-index: 1038;
+
+    .sidenav .sidenav-menu {
+      overflow-y: auto;
+    }
+  }
+}
+
+@media (max-width: 767.98px){
+  .nav-fixed #layoutSidenav #layoutSidenav_nav {
+    width: $sidebar-width-mobile;
+    flex-basis: $sidebar-width-mobile;
+  }
+
+  #layoutSidenav #layoutSidenav_content{
+    margin-left: -$sidebar-width-mobile;
+  }
+}
+
+.nav .nav-link .nav-link-icon,
+.sidenav-menu .nav-link .nav-link-icon {
+  margin-right: 10px;
+}
+
+.topnav {
+  height: $header-dashboard-height;
+  z-index: 1039;
+
+  .navbar-brand{
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+
+  .navbar-brand img {
+    width: 205px;
+  }
+
+  #sidebarToggle{
+    padding: 2px 5px 0 5px;
+    border: $border-1;
+    border-radius: 2px;
+    font-size: 19px;
+  }
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  height: $dashboard-height;
+  flex-wrap: nowrap;
+
+  .sidenav-menu {
+    flex-grow: 1;
+
+    .nav {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      margin-top: 15px;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        position: relative;
+
+        span{
+          transition: 0.4s linear;
+        }
+
+        .nav-link-icon {
+          font-size: 0.9rem;
+        }
+        
+        .sidenav-collapse-arrow {
+          display: inline-block;
+          margin-left: auto;
+          transition: transform 0.15s ease;
+        }
+        
+        &.collapsed .sidenav-collapse-arrow {
+          transform: rotate(-90deg);
+        }
+      }
+
+      .sidenav-menu-nested {
+        margin-left: 15px;
+        margin-top: 0;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.sidenav-light {
+  background-color: #fff;
+
+  .sidenav-menu{
+    .nav-link, .nav-link .nav-link-icon, .nav-link .sidenav-collapse-arrow {
+      color: $body-color;
+    }
+
+    .nav-link:hover{
+      background: $dropdown-link-hover-bg;
+    }
+    
+    .nav-link:hover, .nav-link.active, .nav-link.active .nav-link-icon, .nav-link:hover .nav-link-icon, .nav-link:hover .sidenav-collapse-arrow .fas, .nav-link.active .sidenav-collapse-arrow .fas {
+      color: $primary;
+    }
+  }
+}
+// Dashboard End
+
+// Admin Panel Index
+.statistics {
+  .card{
+    border: $border-1;
+  }
+
+  .card-body{
+    padding: 30px 5px 25px 5px;
+  }
+  
+  .number{
+    font-size: 30px;
+    font-weight: $font-weight-bold;
+    line-height: 35px;
+    margin-top: 5px;
+  }
+}
+// Admin Panel Index End

@@ -1,0 +1,32 @@
+<%= form_with(model: plan, local: true) do |form| %>
+  <% if plan.errors.any? %>
+    <!-- <div id="error_explanation">
+      <ul>
+      <% plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div> -->
+  <% end %>
+  <div class="form-group form-floating">
+    <%= form.text_field :nickname, required: true, placeholder:"Enter Nickname", id:'nickname' %>
+    <label for="nickname">Enter Nickname</label>
+  </div>
+  <div class="form-group form-floating">
+    <%= form.number_field :amount_decimal, required: true, min: 0, max: 999999, step: :any,  placeholder:"Enter Amount", id:'amount'  %>
+    <label for="amount">Enter Amount</label>
+  </div>
+  <div class="form-group form-floating">
+    <%= form.select :currency, ['USD','GBP'], {include_blank:"Select Currency"}, required: true, id:'currency' %>
+    <label for="currency">Currency</label>
+  </div>
+  <div class="form-group form-floating">
+    <%= form.select :interval, ['year','month', 'week', 'day'], {include_blank:"Select Interval"}, required: true, id:'interval' %>
+    <label for="interval">Interval</label>
+  </div>
+  <div class="form-group form-floating i_count d-none">
+    <%= form.number_field :interval_count, min: 1, placeholder:"Enter Interval Count", id:'interval_count' %>
+    <label for="interval_count">Enter Interval Count</label>
+  </div>
+  <%= form.submit class:'btn-submit' %>
+<% end %>

@@ -1,0 +1,68 @@
+var stripe = Stripe("<%= ENV["PUBLISHABLE_KEY"] %>");
+
+console.log(JSON.parse('<%= raw @payment_attrs.to_json %>'));
+<% if @response.success? %>
+  <% if @payment_attrs[:payment_intent_status].present? and @payment_attrs[:payment_intent_status] == "requires_action" %>
+    stripe.handleCardPayment("<%= @payment_attrs[:payment_intent_client_secret] %>" ).then(function(result) {
+      if (result.error) {
+        Swal.fire({
+          title: 'Payment Failure',
+          text: result.error.message,
+          icon: 'error',
+          timer: 2000
+        },function() {
+          window.location.href = "<%= request.referer %>"
+        });
+      } else {
+        Swal.fire({
+          title: 'Success',
+          text: "Subscription created!",
+          icon: 'success',
+          timer: 2000
+        },function() {
+          window.location.href = "<%= user_settings_url %>"
+        });
+      }
+    });
+  <% elsif @payment_attrs[:payment_intent_status].present? and @payment_attrs[:payment_intent_status] == "requires_payment_method" %>
+    $('#spinner').modal('hide');
+    Swal.fire({
+      title: 'Payment Failure',
+      text: "We are unable to charge your card. Please try again with different payment method",
+      icon: 'error',
+      timer: 2000
+    },function() {
+      window.location.href = "<%= request.referer %>"
+    });
+  <% elsif @payment_attrs[:stripe_subscription_status] == 'active' %>
+    $('#spinner').modal('hide');
+      Swal.fire({
+        title: 'Success',
+        text: "Subscription created!",
+        icon: 'success',
+        timer: 2000
+      },function() {
+        window.location.href = "<%= user_settings_url %>"
+      });
+  <% else %>
+  $('#spinner').modal('hide');
+    Swal.fire({
+      title: 'Failure',
+      text: "<%= @payment_attrs[:stripe_subscription_status] %>",
+      icon: 'error',
+      timer: 2000
+    },function() {
+      window.location.href = "<%= plans_url %>"
+    });
+  <% end %>
+<% else %>
+$('#spinner').modal('hide');
+  Swal.fire({
+    title: 'Failure',
+    text: "<%= raw @response.message.to_s %>",
+    icon: 'error',
+    timer: 2000
+  },function() {
+    window.location.href = "<%= plans_url %>"
+  });
+<% end %>

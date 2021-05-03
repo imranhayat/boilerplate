@@ -1,0 +1,52 @@
+<div id="layoutSidenav_nav">
+  <nav class="sidenav accordion sidenav-light" id="sidenavAccordion">
+    <div class="sidenav-menu">
+      <div class="nav">
+        <a class="nav-link" href="<%= admin_panel_path %>">
+          <div class="nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="<%= admin_users_path %>">
+          <div class="nav-link-icon"><i class="fas fa-users"></i></div>
+          <span>Users</span>
+        </a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStripe" aria-expanded="false" aria-controls="collapseStripe">
+          <div class="nav-link-icon"><i class="fas fa-credit-card"></i></div>
+          <span>Stripe</span>
+          <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse sidebar-collapse" id="collapseStripe" data-parent="#sidenavAccordion">
+          <nav class="sidenav-menu-nested nav" id="sidenavAccordionPages">
+            <% if Product.first.present? %>
+              <a class="nav-link collapsed" href="<%= product_path(Product.first) %>">
+                <div class="nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                <span>Product</span>
+              </a>
+              <a class="nav-link collapsed" href="<%= plans_path %>">
+                <div class="nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
+                <span>Plans</span>
+              </a>
+              <a class="nav-link collapsed" href="<%= all_invoices_path %>">
+                <div class="nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                <span>All Invoices</span>
+              </a>
+            <% else %>
+              <a class="nav-link collapsed" href="<%= new_product_path %>">
+                <div class="nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                <span>Create Product</span>
+              </a>
+            <% end %>
+          </nav>
+        </div>
+        <a class="nav-link d-flex d-lg-none" href="<%= edit_user_registration_path %>">
+          <div class="nav-link-icon"><i class="fas fa-cog"></i></div>
+          <span>Settings</span>
+        </a>
+        <a class="nav-link d-flex d-lg-none" href="<%= destroy_user_session_path %>" data-method="delete">
+          <div class="nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>

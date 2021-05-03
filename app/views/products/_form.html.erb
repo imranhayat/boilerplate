@@ -1,0 +1,23 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group form-floating">
+    <%= form.text_field :name, placeholder:"Enter Product Name", id: "product_name" %>
+    <label for="product_name">Enter Product Name</label>
+  </div>
+
+  <div class="form-group form-floating">
+    <%= form.select :payment_gateway, Product.payment_gateways.keys,{}, {id:'product_payment_gateway'} %>
+    <label for="product_payment_gateway">Select Payment Gateway</label>
+  </div>
+  
+    <%= form.submit class:'btn-submit' %>
+<% end %>

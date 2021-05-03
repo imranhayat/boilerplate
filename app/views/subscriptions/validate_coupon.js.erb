@@ -1,0 +1,32 @@
+<% if @response.success? and @response.coupon['valid'] == true %>
+	$( "#coupon" ).prop( "disabled", true );
+	$('#couponSubmit').hide();
+  Swal.fire({
+		text: "Coupon Applied successfully",
+		position: 'top-end',
+		showConfirmButton: false,
+		showCloseButton: true,
+		timer: 3000,
+		backdrop: false
+	});
+	$('#cardSubmit').html("Pay <%= number_to_currency(@discounted_amount) %>");
+	$('#if_discount_applied').html("Your discounted amount is:  <%= number_to_currency(@discounted_amount) %>")
+<% elsif @response.coupon['valid'] == false %>
+	Swal.fire({
+		text: "Coupon is not Valid anymore!",
+		position: 'top-end',
+		showConfirmButton: false,
+		showCloseButton: true,
+		timer: 3000,
+		backdrop: false
+	});
+<% else %>
+	Swal.fire({
+		html: "<%= @response.message %>",
+		position: 'top-end',
+		showConfirmButton: false,
+		showCloseButton: true,
+		timer: 3000,
+		backdrop: false
+	});
+<% end %>

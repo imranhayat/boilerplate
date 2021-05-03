@@ -1,0 +1,57 @@
+<div class="banner-header">
+  <div class="d-flex align-items-center">
+    <div class="flex-grow-1">
+      <h2>All Users</h2>
+     <%= render_breadcrumbs %>
+    </div>
+    <div class="flex-shrink-0 pl-2">
+      <a href="/users/invitation/new" class="btn btn-primary">Invite Users</a>
+    </div>
+  </div>
+</div>
+<div class="container-fluid py-3 py-md-4 px-0 px-sm-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive datatable">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Account Created On</th>
+              <th>Subscription Plan</th>
+              <th>Access</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name.present? ? user.name : 'Not Provided' %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone_number.present? ? user.phone_number : 'Not Provided' %></td>
+                <td><%= user.created_at.strftime('%d/%B/%Y at %I:%M %p') %></td>
+                <td>
+                  <% if user.subscription.present? && user.subscription.active? %>
+                    <%= user.subscription.plan.nickname + ' (' + number_to_currency(user.subscription.plan.amount_decimal, unit: user.subscription.plan.currency == 'USD' ? '$ ' : ' £ ') + ')' %>
+                  <% else %>
+                    No Subscription
+                  <% end %>
+                </td>
+                <td>
+                  <% if user.revoke_access == false %>
+                    <%= link_to 'Disable', change_access_path(disable: user.id) %>
+                  <% else %>
+                    <%= link_to 'Enable', change_access_path(enable: user.id) %>
+                  <% end %>
+                </td>
+                <td><%= link_to 'Show Invoices', invoices_path(user: user.id) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

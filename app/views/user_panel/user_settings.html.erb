@@ -1,0 +1,274 @@
+<section class="payment py-4 py-md-5">
+  <div class="container-lg px-0 px-md-3">
+    <h2 class="text-center mb-4 px-2">Payment & Subscription Settings</h2>
+
+    <!-- Subscriptions -->
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h3 class="card-title">Subscriptions</h3>
+              <% if @subscription.present? && @subscription.active? %>
+                <div>
+                  <span class="font-weight-bold"><%= @plan.nickname %>  <%= @plan.currency == 'USD' ? '$' : "£"  %><%= @plan.amount_decimal %>
+                  </span>
+                  <% if @subscription.current_period_start.present? %>
+                    <span class="font-weight-bold pl-2">Started at:</span> <%= Time.at(@subscription.current_period_start).to_datetime.strftime('%d %B %Y (%A) on %H:%M %P') %>
+                  <% end %>
+                  <% if @subscription.current_period_end.present? %>
+                    <span class="font-weight-bold pl-2">Ends on:</span> <%= Time.at(@subscription.current_period_end).to_datetime.strftime('%d %B %Y (%A) on %H:%M %P') %>
+                  <% end %>
+                </div>
+                <% if @subscription.cancel_at_period_end.present? %>
+                  <div>
+                    <span class="font-weight-bold">Cancel at Period End:</span> <%= @subscription.cancel_at_period_end.to_s.capitalize %>
+                  </div>
+                <% end %>
+                <div class="mt-2">
+                  <%= link_to 'Cancel Subscription Now', cancel_subscription_now_path, :data => {:confirm => 'Are you sure you want to cancel your subscription, this will cancel your subscription right now.'} %>
+                  <% if @subscription.cancel_at_period_end? %>
+                    <%= link_to 'Allow Renewal of Subscription', setup_renewal_of_subscription_path, :data => {:confirm => "Are you sure you want to allow the renewal of your subscription? After current period ends, your renewal of subscription will again start on #{Time.at(@subscription.current_period_start).to_datetime.strftime('%d %B %Y (%A) on %H:%M %P')}"}, class: 'ml-2' %>
+                  <% else %>
+                    <%= link_to 'Cancel Renewal of Subscription', setup_renewal_of_subscription_path, :data => {:confirm => "Are you sure you want to cancel the renewal of your subscription? Your subscription will not be renewed and will end on #{Time.at(@subscription.current_period_end).to_datetime.strftime('%d %B %Y (%A) on %H:%M %P')}"}, class: 'ml-2' %>
+                  <% end %>
+                </div>
+              <% else %>
+                <p class="card-text">You are not subscribed to any plan yet.</p>
+              <% end %>
+          </div>
+          <div class="d-none d-md-block flex-shrink-0">
+            <img src="/subs.png" class="img-fluid" alt="Subscriptions">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="#">Manage Subscriptions</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h3 class="card-title">Payment Methods</h3>
+            <%# if @payment_methods.present? %>
+              <div class="form-row">
+                <%# @payment_methods.each do |pm| %>
+                  <div class="payment-col col-xl-11 col-xxl-10">
+
+                    <!-- Single Card -->
+                    <div class="form-row align-items-start align-items-sm-center payment-method p-2 p-sm-3">
+                      <div class="col-11 col-sm-7 col-md-8 col-lg-7 mb-1 mb-sm-0 align-items-start align-items-sm-center order-1 order-sm-1 d-inline-flex position-relative">
+                        <img src="<%#= pm.brand %>Visa.png" alt="<%#= pm.brand %>Visa" width="40" class="pr-8">
+                        <div class="lh-1">
+                          <%#= pm.brand.humanize %>Visa <span class="d-inline-block">**** <%#= pm.last4 %>4242</span>
+                        </div>
+
+                        <!-- Default Badge -->
+                        <%# if pm.default %>
+                        <span class="badge badge-primary badge-default pt-s4 ml-2">Default</span>
+                        <%# end %>
+
+                      </div>
+                      <div class="col-sm-4 col-md-3 col-lg-4 ml-45 ml-sm-0 order-3 order-sm-2 lh-1 px-0">Expires <%#= pm.exp_month %>03/<%#= pm.exp_year %>23</div>
+                      <div class="col-1 text-right order-2 order-sm-3 lh-9">
+
+                        <!-- Delete Icon -->
+                        <%# if pm.default %>
+                          <a data-method="DELETE" href="<%#= payment_method_path(pm)%>" class="text-reset" title="Delete" data-confirm="Are you sure?" data-commit="Yes, delete this!" data-cancel="Cancel">
+                            <i class="fas fa-times card-icon"></i>
+                          </a>
+                        <%# else %>
+                          
+                        <%# end %>
+
+                      </div>
+                    </div>
+                    <!-- Single Card End -->
+
+                  </div>
+                <%# end %>
+                <div class="payment-col col-xl-11 col-xxl-10">
+
+                  <!-- Single Card -->
+                  <div class="form-row align-items-start align-items-sm-center payment-method p-2 p-sm-3">
+                    <div class="col-11 col-sm-7 col-md-8 col-lg-7 mb-1 mb-sm-0 align-items-start align-items-sm-center order-1 order-sm-1 d-inline-flex position-relative">
+                      <img src="<%#= pm.brand %>Visa.png" alt="<%#= pm.brand %>Visa" width="40" class="pr-8">
+                      <div class="lh-1">
+                        <%#= pm.brand.humanize %>Visa <span class="d-inline-block">**** <%#= pm.last4 %>4242</span>
+                      </div>
+
+                      <!-- Default Badge -->
+                      <%# if pm.default %>
+                      <%# <span class="badge badge-primary badge-default pt-s4 ml-2">Default</span> %>
+                      <%# end %>
+
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-4 ml-45 ml-sm-0 order-3 order-sm-2 lh-1 px-0">Expires <%#= pm.exp_month %>03/<%#= pm.exp_year %>23</div>
+                    <div class="col-1 text-right order-2 order-sm-3 lh-9">
+
+                      <!-- Delete Icon -->
+                      <%# if pm.default %>
+                        
+                      <%# else %>
+                        <div class="options-dropdown dropdown">
+                        <a class="text-reset dropdown-toggle" id="actions1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v card-icon lh-9"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actions1">
+                          <a data-method="PUT" href="<%#= payment_method_make_default_path(pm) %>" class="dropdown-item">Make Default</a>
+                          <%#= link_to 'Delete', pm, method: :delete, class: 'dropdown-item', data: {confirm: 'Are you sure?', commit: 'Yes, delete this!', cancel: 'Cancel'} %>
+                          <a data-method="DELETE" href="<%#= payment_method_path(pm)%>" class="dropdown-item" title="Delete" data-confirm="Are you sure?" data-commit="Yes, delete this!" data-cancel="Cancel">
+                            Delete
+                          </a>
+                        </div>
+                      </div>
+                      <%# end %>
+
+                    </div>
+                  </div>
+                  <!-- Single Card End -->
+
+                </div>
+              </div>
+            <%# else %>
+              <%# <p class="card-text">No Payment Method currently added.</p> %>
+            <%# end %>
+          </div>
+          <div class="d-none d-md-block d-lg-none d-xl-block flex-shrink-0 pl-2">
+            <img src="/card.png" class="img-fluid card-image" alt="Card Details">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <%#= link_to 'Add Payment Method', new_payment_method_path, remote: true %>
+        <a href="#" data-toggle="modal" data-target="#paymentMethod">Add Payment Method</a>
+      </div>
+    </div>
+
+    <!-- Card Details -->
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h3 class="card-title">Card Details</h3>
+            <% if current_user.stripe_customer_id? && current_user.stripe_payment_method_id? %>
+              <div class="form-row">
+                <div class="col-auto mb-2">
+                  <div class="border px-3 pt-3 pb-2 rounded-sm">
+                    <div class="d-flex align-items-center mb-2">
+                      <img src="<%= @card_details[:brand] %>.png" alt="<%= @card_details[:brand] %>" width="40">
+                      <div class="pl-8"><%= @card_details[:brand] %> **** <%= @card_details[:last4] %></div>
+                    </div>
+                    <%= link_to 'Add or Update Card', update_card_details_path, :data => {:confirm => "Are you sure you want to update your credit card details, this will re-direct you to stripe and you will update your card details there."}, remote: true %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <p class="card-text">No Card currently added.</p>
+            <% end %>
+          </div>
+          <div class="d-none d-md-block flex-shrink-0">
+            <img src="/card.png" class="img-fluid" alt="Card Details">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="#">Add Payment Method</a>
+      </div>
+    </div>
+
+    <!-- Invoices -->
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h3 class="card-title">Invoices</h3>
+            <% if @invoices.present? %>
+              <div class="table-responsive no-datatable">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>
+                        Description
+                      </th>
+                      <th>
+                        Amount
+                      </th>
+                      <th>
+                        Invoice
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @invoices.each do |invoice| %>
+                      <tr>
+                        <td>
+                          <% invoice.lines.data.each do |d| %>
+                            <div>
+                              <%= d.description %>
+                            </div>
+                          <% end %>
+                          <div class="text-muted small">
+                            <%= Time.at(invoice.created).to_datetime.strftime('%d %B %Y (%A) at %H:%M %P') %>
+                          </div>
+                        </td>
+                        <td>
+                          <%= number_to_currency((invoice.amount_paid)/100.00) %>
+                        </td>
+                        <td>
+                          <a target="_blank" href="<%= invoice.hosted_invoice_url %>" rel="noopener">
+                            <i class="fas fa-download">
+                          </i> Download</a>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            <% else %>
+              <p class="card-text">No Invoices currently present.</p>
+            <% end %>
+          </div>
+          <div class="d-none d-md-block flex-shrink-0">
+            <img src="/invoice.png" class="img-fluid" alt="Invoices">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="<%= invoices_path(user: current_user.id) %>">Manage All Invoices</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="paymentMethod" tabindex="-1" aria-labelledby="paymentMethodLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentMethodLabel">Add New Payment Method</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="card">Card Information</label>
+          <input type="text" id="card" placeholder="Card Information">
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="default">
+          <label for="default">Make Default</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

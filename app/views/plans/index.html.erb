@@ -1,0 +1,60 @@
+<% if current_user.has_role? :admin %>
+  <div class="banner-header">
+    <div class="d-flex align-items-center">
+      <div class="flex-grow-1">
+        <h2>Pricing Plans</h2>
+      <%= render_breadcrumbs %>
+      </div>
+      <div class="flex-shrink-0 pl-2">
+        <% if can? :new, Plan %>
+          <%= link_to 'Add New Plan', new_plan_path, class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<section class="pricing pt-4 pt-lg-5 pb-3 pb-lg-4">
+  <div class="container-xxl">
+    <% if !current_user.has_role? :admin %>
+      <h2 class="text-center mb-4">Pricing Plans</h2>
+    <% end %>
+    <% if @plans.present? %>
+      <div class="text-center pricing-tabs">
+        <div class="btn-group rounded bg-white nav d-inline-flex" role="tablist" id="myTab" aria-label="Pricing Plans">
+          <a class="btn active" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="month" aria-selected="true">Monthly Billing</a>
+          <a class="btn" id="year-tab" data-toggle="tab" href="#year" role="tab" aria-controls="year" aria-selected="false">Annual Billing</a>
+        </div>
+      </div>
+      <div class="tab-content mt-3" id="myTabContent">
+        <% if @monthly_plans.present? %>
+          <div class="row no-gutters justify-content-center tab-pane fade show active" id="month" role="tabpanel" aria-labelledby="month-tab">
+            <% @monthly_plans.each do |plan| %>
+              <%= render 'plan', plan: plan %>
+            <% end %>
+          </div>
+        <% else  %>
+          <div class="justify-content-center tab-pane fade show active" id="month" role="tabpanel" aria-labelledby="month-tab">
+            No Monthly Plan present yet.
+          </div>
+        <% end %>
+        <% if @yearly_plans.present? %>
+          <div class="row no-gutters justify-content-center tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
+            <% @yearly_plans.each do |plan| %>
+              <%= render 'plan', plan: plan %>
+            <% end %>
+          </div>
+        <% else  %>
+          <div class="justify-content-center tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
+            No Annual Plan present yet.
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center">
+        No Plans currently present.
+      </div>
+    <% end %>
+  </div>
+</section>
+<div id="spinner"><img src="/loading.svg" width="120px" height="120px" alt="Loading"></div>
+<div id="modal_div"></div>

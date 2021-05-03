@@ -1,0 +1,149 @@
+@import "_variables";
+@import url('https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css');
+@import url('https://cdn.datatables.net/buttons/1.7.0/css/buttons.bootstrap4.min.css');
+@import url('https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css');
+
+// Datatable
+table.dataTable>tbody>tr.child ul.dtr-details>li{
+  border-color: $border-color;
+}
+
+.custom-select-sm{
+  padding-right: 1rem;
+  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 6'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.2rem center/8px 12px;
+}
+
+div.dataTables_wrapper div.dataTables_filter{
+  display: inline-block;
+
+  label{
+    margin-bottom: 0;
+    position: relative;
+  }
+} 
+
+div.dataTables_wrapper {
+
+  div.dataTables_info{
+    padding-top: 0;
+  }
+
+  div.dataTables_length{
+    label{
+      margin-bottom: 0;
+    }
+    select{
+      border-radius: 3px;
+      padding: 4px 15px 5px 6px !important;
+      border-radius: 3px;
+      height: 30px;
+    }
+  } 
+}
+
+div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]{
+  padding: 0;
+}
+
+div.dt-buttons{
+  padding-right: 10px;
+  width: auto;
+  margin-bottom: 0;
+}
+
+div.dataTables_wrapper div.dataTables_filter input{
+  margin-left: 0;
+}
+
+@media(max-width: 634.98px){
+  div.dataTables_wrapper div.dataTables_filter input {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  div.dt-buttons{
+    margin-bottom: 10px;
+  }
+}
+
+// Datatable Responsive Plus Minus Icons
+table.dataTable.dtr-inline.collapsed>tbody{
+  tr>{
+    th.dtr-control:before,
+    td.dtr-control:before{
+      content: '\f055';
+      font-family: $font-awesome;
+      box-shadow: none;
+      color: $primary;
+      font-weight: 600;
+      top: calc(50% - 0.5em);
+      margin-top: 0;
+      border: 0;
+      background-color: transparent !important;
+    }
+  }
+
+  tr.parent>{
+    th.dtr-control:before,
+    td.dtr-control:before{
+      content:'\f056' !important;
+    }
+  }
+}
+
+table.dataTable>tbody>tr.child ul.dtr-details {
+  display: block;
+}
+
+.dtr-title:after {
+  content: ":";
+}
+
+@media(max-width: 991.98px){
+  .dt-buttons .btn{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.table-bordered thead th, .table-bordered thead td {
+  border-bottom-width: 0px;
+  border-top-width: 0px;
+}
+
+// Datatable Sorting Icons
+.sorting{
+  &, &_asc, &_desc{
+    &:after, &:before{
+      font-size: 15px;
+      line-height: 18px;
+      font-weight: 600;
+      font-family: $font-awesome;
+    }
+
+    &:after{
+      right: 0.2em !important;
+      content: '\f30c' !important;
+    }
+
+    &:before{
+      right: 0.8em !important;
+      content: '\f309' !important;
+    }
+  }
+}
+
+.table.dataTable>tbody>tr.child span.dtr-title{
+  font-weight: $font-weight-bold;
+}
+
+.search-label{
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  left: 24px;
+  top: 12px;
+  font-size: 14px;
+  color: $input-placeholder-color;
+}
+// Datatable End

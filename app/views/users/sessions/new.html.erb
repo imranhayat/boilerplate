@@ -1,0 +1,64 @@
+<div class="page-center">
+  <div class="container-fluid px-0 bg-white h-100">
+    <div class="row no-gutters h-100 align-items-center justify-content-center">
+      <div class="col-lg-6">
+        <div class="w-470 px-3 px-sm-0 py-4 mx-auto">
+          <a href="/" class="d-block text-center">
+            <img src="/logo.svg" width="205" height="24" alt="YourAppName Logo">
+          </a>
+          <h3 class="text-center my-4">Sign In to YourAppName</h3>
+          <div class="form-row mb-3">
+            <div class="col-sm mb-2 mb-sm-0">
+              <a href="<%= user_facebook_omniauth_authorize_path %>" class="btn-facebook">
+                <span class="devise-social-icons"><img src="/facebook-icon.png" width="24" height="24" alt="Facebook Icon"></span>
+                <span class="devise-social-text">Sign In with Facebook</span>
+              </a>
+            </div>
+            <div class="col-sm">
+              <a href="<%= user_google_oauth2_omniauth_authorize_path %>" class="btn-google">
+                <span class="devise-social-icons"><img src="/google-icon.png" width="18" height="18" alt="Google Icon"></span>
+                <span class="devise-social-text">Sign In with Google</span>
+              </a>
+            </div>
+          </div>
+          <div class="row align-items-center no-gutters my-2">
+            <div class="col-5">
+              <hr/>
+            </div>
+            <div class="col-2 text-center">
+              OR
+            </div>
+            <div class="col-5">
+              <hr/>
+            </div>
+          </div>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-group form-floating">
+              <%= f.email_field :email, placeholder: 'Enter Your Email', required: true %>
+              <label for="user_email">Enter Your Email</label>
+            </div>
+            <div class="form-group form-floating">
+              <%= f.password_field :password, placeholder: 'Enter Your Password', required: true, minlength: 6 %>
+              <label for="user_password">Enter Your Password</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3 font-size-sm">
+              <% if devise_mapping.rememberable? -%>
+                <div class="checkbox">
+                  <%= f.check_box :remember_me %>
+                  <label for="user_remember_me">Remember me</label>
+                </div>
+              <% end -%>
+              <%= link_to "Forgot password?", new_password_path(resource_name) %>
+            </div>
+            <%= f.submit "Sign In", class:'btn-submit' %>
+          <% end %>
+          <div class="text-center mt-3">
+            <p>Not a member? <%= link_to "Join", new_registration_path(resource_name) %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block devise-bg">
+      </div>
+    </div>
+  </div>
+</div>

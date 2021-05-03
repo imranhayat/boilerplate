@@ -1,0 +1,312 @@
+@import "_variables";
+
+//  Pricing
+.pricing {
+  .card {
+    border: $border-1;
+    border-radius: 0;
+  }
+  
+  // .single-plan:nth-child(3) {
+  //   @extend .plan-main;
+  // }
+  
+  .plan-main{
+    .card{
+      border-color: $primary;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+    .card-header{
+      background-color: $primary;
+      color: #fff;
+    }
+  }
+  
+  .card-header{
+    border-radius: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fff;
+    border-bottom: $border-1;
+  }
+  
+  .card-title, .card-price{
+    font-weight: $font-weight-bold;
+    line-height: 1.3;
+  }
+  
+  .card-price {
+    font-size: 3rem;
+  }
+  
+  .card-price .period {
+    font-size: 0.9rem;
+  }
+  
+  .text-muted {
+    opacity: 0.7;
+  }
+  
+  
+  .btn-group {
+    .btn:not(:first-child){
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+    
+    .btn:not(:last-child){
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+  }
+
+  .tab-content > .active{
+    display: flex;
+  }
+
+  .btn-choose-plan{
+    border-radius: 0;
+  }
+   
+}
+
+@media(max-width: 1350px){
+  .pricing .card-price {
+    font-size: 2.3rem;
+  }
+}
+
+#spinner {
+  display: none;
+  position: absolute;
+  top: calc(50vh - 32px);
+  left: calc(50vw - 32px);
+  z-index: 9999;
+}
+
+
+.payment-method{
+  position: relative;
+  border-radius: 3px;
+  border: $border-1;
+}
+
+.payment-col:not(:last-child) .payment-method{
+  margin-bottom: 10px;
+}
+
+.card-icon{
+  width: 10px;
+  opacity: 0.7;
+  -webkit-text-stroke: 0.9px;
+  -webkit-text-stroke-color: #fff;
+}
+
+.options-dropdown .dropdown-toggle{
+  cursor: pointer;
+}
+
+.options-dropdown .dropdown-toggle::after{
+  display: none;
+}
+
+// Pricing End
+
+// Image Preview
+.avatar-group, .avatar-upload .avatar-edit input + label, .avatar-upload .avatar-preview{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-upload {
+  position: relative;
+  
+  .avatar-edit {
+    position: absolute;
+    right: 20px;
+    z-index: 1;
+    top: 10px;
+    
+    input {
+      display: none;
+      
+      + label {
+        background: #fff;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        
+        &:hover {
+          background: #ededed;
+        }
+        i{
+          font-size: 20px;
+          color: $primary;
+        }
+      }
+    }
+  }
+  
+  .avatar-preview {
+    width: 192px;
+    height: 192px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    border: 6px solid $border-color;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+// Image Preview End
+
+// Profile Page
+.first-letter{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary;
+  color: #fff;
+  
+  &.profile{
+    width: 150px;
+    height: 150px;
+    font-size: 100px;
+  }
+  
+  &.edit-profile{
+    width: 180px;
+    height: 180px;
+    font-size: 100px;
+  }
+  
+  &.header{
+    width: 45px;
+    height: 45px;
+    font-size: 25px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+}
+
+.img-user{
+  width: 150px;
+  height: 150px;
+}
+
+.col-profile{
+  background: url('/user_background.png') right / cover no-repeat #f9f9f9;
+  place-items: flex-start;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+// Profile Page End
+
+// Payment Settings
+.payment {
+  .card{
+    border: $border-1;
+    border-radius: 0;
+    
+    &:not(:last-child){
+      margin-bottom: 20px;
+    }
+  }
+  
+  .card-footer{
+    background-color: #fff;
+    border-top: $border-1;
+  }
+}
+// Payment Settings End
+
+
+@media(min-width: 992px){
+  .navbar{
+  
+    .dropdown-toggle{
+      display: flex;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+  
+      .header-avatar{
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    }
+    
+  }
+}
+
+@media(max-width: 991.98px){
+  .navbar {
+    .dropdown-toggle::after{
+      display: none;
+    }
+    
+    .dropdown-menu{
+      display: block;
+      padding: 0;
+      border: 0;
+  
+      .dropdown-item{
+        padding-left: 5px;
+        padding-right: 5px;
+  
+        i{
+          display: none;
+        }
+      }
+    }
+  }
+  
+  .single-plan{
+    order: 2;
+  }
+  
+  // .single-plan:nth-child(3) {
+  //   @extend .plan-main;
+  // }
+  
+  .plan-main{
+    order: 1;
+  }
+  
+  .card-image{
+    width: 204px;
+  }
+  
+  .img-user{
+    width: 100px;
+    height: 100px;
+  }
+  
+  .first-letter{
+    &.profile{
+      width: 100px;
+      height: 100%;
+      font-size: 50px;
+    }
+    &.header{
+      display: none;
+    }
+  }
+}
+
+@media(max-width: 575.98px){
+  .col-profile{
+    background-image: none;
+  }
+}

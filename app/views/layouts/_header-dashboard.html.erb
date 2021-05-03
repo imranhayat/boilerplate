@@ -1,0 +1,32 @@
+<nav class="topnav navbar navbar-expand navbar-light bg-white border-bottom">
+  <button class="btn btn-link" id="sidebarToggle" href="#" aria-label="Toggle Sidebar"><i class="fas fa-bars"></i></button>
+  <a class="navbar-brand" href="/"><img src="/logo.svg" width="205" height="24" alt="Logo"></a>
+  
+  <!-- Navbar-->
+  <ul class="navbar-nav ml-auto d-none d-lg-block">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% if current_user.profile_pic.present? %>
+          <img src="<%= current_user.profile_pic %>" class="header-avatar" alt="Profile Picture">
+        <% else %>
+          <div class="first-letter header">
+            <% if current_user.name.present? %>
+              <%= current_user.name.first %>
+            <% else %>
+              <%= current_user.email.first %>
+            <% end %>
+          </div>
+        <% end %>
+        <% if current_user.name.present? %>
+          <%= current_user.name %>
+        <% else %>
+          <%= current_user.email %>
+        <% end %>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="<%= edit_user_registration_path %>">Settings</a>
+        <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>

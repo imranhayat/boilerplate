@@ -1,0 +1,22 @@
+@import "_variables";
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.min.css');
+
+.swal2-top-end .swal2-popup {
+  padding: 15px 5px;
+  max-width: 370px !important;
+}
+
+.swal2-top-end .swal2-html-container{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.swal2-close{
+  font-size: 1.9rem !important;
+  color: #000 !important;
+}
+
+.swal2-confirm{
+  background-color: $primary !important;
+}

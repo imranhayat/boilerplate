@@ -1,0 +1,53 @@
+<div class="page-center">
+  <div class="card w-470">
+    <div class="card-body">
+      <h3 class="text-center">Update Profile</h3>
+      <hr/>
+      <%= form_for(current_user) do |f| %>
+        <div class="form-group avatar-group">
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+							<%= f.file_field :profile_pic, id: "imageUpload", accept:"image/*" %>
+              <label for="imageUpload"><i class="fas fa-pencil-alt"></i></label>
+            </div>
+            <div class="avatar-preview">
+              <% if current_user.profile_pic.present? %>
+                <img id="imagePreview" src="<%= current_user.profile_pic %>" alt="Profile Pic">
+              <% else %>
+                <div class="first-letter edit-profile">
+                  <% if current_user.name.present? %>
+                    <%= current_user.name.first %>
+                  <% else %>
+                    <%= current_user.email.first %>
+                  <% end %>
+                </div>
+              <% end %>
+              <img id="imagePreview" src="<%= current_user.profile_pic %>" alt="Profile Picture" class="hidden">
+            </div>
+          </div>
+        </div>
+        <div class="form-group form-floating">
+          <%= f.text_field :first_name, required: true, placeholder: 'Enter Your First Name' %>
+          <label for="user_name">Enter Your First Name</label>
+        </div>
+        <div class="form-group form-floating">
+          <%= f.text_field :last_name, required: true, placeholder: 'Enter Your Last Name' %>
+          <label for="user_name">Enter Your Last Name</label>
+        </div>
+        <div class="form-group form-floating">
+          <%= f.telephone_field :phone_number, placeholder: 'Enter Your Phone Number', required: true, maxlength: 14, pattern:'\(\d{3}\)[ ]?\d{3}[-]?\d{4}', title:'(123) 456-7890' %>
+          <label for="user_phone_number">Enter Your Phone Number</label>
+        </div>
+        <div class="form-group form-floating">
+          <input type="date" name="user[date_of_birth]" value="<%= current_user.date_of_birth %>" id="user_date_of_birth">
+          <label for="user_date_of_birth">Enter Your Date of Birth</label>
+        </div>
+        <div class="form-group form-floating">
+          <%= f.select :gender,options_for_select([["Male","Male"],["Female","Female"],["Other","Other"]]),{},{} %>
+          <label for="user_gender">Select Gender</label>
+        </div>
+        <%= f.submit "Update", class:'btn-submit' %>
+			<% end %>
+    </div>
+  </div>
+</div>

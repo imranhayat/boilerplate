@@ -1,0 +1,125 @@
+// Bootstrap Variables
+
+// Colors
+$body-bg: #f5f5f5;
+$body-color: #202020;
+$text-muted: #aaaaaa;
+$gray: #6c757d;
+$primary: #7D26CD;
+$link-hover-color: darken($primary, 15%);
+$secondary: #283747;
+$success: #39DB80;
+$info: #45B8AC; 
+$danger: #de354c;
+$danger: #de354c;
+$hover-background: #000;
+$navbar-light-color: $body-color;
+$navbar-light-hover-color: $primary;
+$navbar-light-active-color: $primary;
+$border-color: #d1d1d1;
+$hr-border-color: $border-color;
+$custom-control-indicator-border-color: $border-color;
+$card-border-color: #fff;
+$input-border-color: $border-color;
+$dropdown-link-hover-bg: #f2f2f2;
+$input-color: $body-color;
+$pagination-border-color: $border-color;
+$input-group-addon-color: #888888;
+$input-group-addon-bg: #f8fbff;
+$input-placeholder-color: #90949c;
+
+// Font
+$font-size-base: 1rem;
+$font-family-poppins: 'Poppins', sans-serif;
+$font-awesome: 'Font Awesome 5 Free';
+$font-family-base: $font-family-poppins;
+$font-weight-bold: 500;
+$btn-font-weight: 600;
+$input-btn-font-size-lg: 16px;
+$input-btn-font-size: 14px;
+$input-font-size: 14px;
+$h1-font-size: 28px;
+$h2-font-size: 26px;
+$h3-font-size: 20px;
+$h4-font-size: 18px;
+$h5-font-size: 16px;
+$h6-font-size: 14px;
+$dropdown-font-size: 14px;
+
+// Padding Margins
+$dropdown-item-padding-x: 0.8rem;
+$input-btn-padding-y-lg: 0.594rem;
+$input-btn-padding-x-lg: 1rem;
+$input-btn-padding-y-sm: 0.594rem;
+$input-btn-padding-x-sm: 0.91rem;
+$input-btn-padding-y: .3rem;
+$input-btn-padding-x: 1rem;
+$input-padding-x: 1rem;
+$input-padding-y: 0.6878rem;
+$navbar-nav-link-padding-x: 20px;
+$navbar-padding-y: 12.5px;
+$navbar-padding-x: 20px;
+$hr-margin-y: 15px;
+$headings-margin-bottom: 0;
+$paragraph-margin-bottom: 0;
+$label-margin-bottom: .2rem;
+
+// Border Radius
+$border-radius: 50px;
+$card-border-radius: 5px;
+$dropdown-border-radius: 5px;
+$btn-border-radius: 5px;
+$border-radius-sm: 5px;
+$input-group-btn-border-radius: $border-radius;
+
+// Other Bootstrap Variables
+$link-hover-decoration: none;
+$modal-md: 520px;
+$modal-content-border-radius: 10px;
+$input-btn-focus-box-shadow: none;
+$custom-select-focus-box-shadow: none;
+$border-1: 1px solid $border-color;
+$hr-opacity: 1;
+$spacer: 20px;
+$spacers: (
+  s2: 2px,
+  s3: 3px,
+  s4: 4px,
+  3: $spacer - 5,
+  7: 7px,
+  8: 8px,
+  20: 20px,
+  25: 25px,
+  30: 30px,
+  35: 35px,
+  40: 40px,
+  45: 45px,
+  50: 50px
+);
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// Responsive Font Size Variables
+$enable-responsive-font-sizes: true;
+$rfs-base-font-size: 1rem;
+
+// Other Variables
+$filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.05));
+$sidebar-width: 270px;
+$sidebar-width-collapsed: 100px;
+$sidebar-width-mobile: 200px;
+$header-dashboard-height: 65px;
+$dashboard-height: calc(100vh - 65px);

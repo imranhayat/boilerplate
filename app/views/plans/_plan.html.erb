@@ -1,0 +1,39 @@
+<div class="my-2 my-xl-2 <%= check_role?(:admin)? 'col-lg-6 col-xl-4 col-xxl-3' : 'col-lg-3' %> col-sm-6 single-plan">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title text-uppercase"><%= plan.nickname %></div>
+      <div class="card-price"><%= number_to_currency(plan.interval == 'year' ? (plan.amount_decimal / 12) : plan.amount_decimal, strip_insignificant_zeros: true, unit: "#{plan.currency == 'USD' ? '$' : '£'}") %><span class="period">/month</span></div>
+      <% if plan.interval == 'year' %>
+        <div><%= number_to_currency(plan.interval == 'year' ? plan.amount_decimal : plan.amount_decimal, strip_insignificant_zeros: true, unit: "#{plan.currency == 'USD' ? '$' : '£'}") %>/year</div>
+        <div>Save <%= plan.currency == 'USD' ? '$' : '£' %><%= '%.2f' % ((plan.amount_decimal / 12) * 2) %>/year</div>
+      <% end %>
+    </div>
+    <div class="card-body p-0">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Feature 1</li>
+        <li class="list-group-item">Feature 2</li>
+        <li class="list-group-item">Feature 3</li>
+        <li class="list-group-item">Feature 4</li>
+        <li class="list-group-item text-muted">Feature 5</li>
+        <li class="list-group-item text-muted">Feature 6</li>
+      </ul>
+      <% if current_user.has_role?(:normal) %>
+        <div class="px-3 pb-3 pt-1">
+          <% if current_user.subscription.present? && current_user.subscription.active? %>
+            <% if @current_user_plan.id == plan.id %>
+              <button type="button" class="btn-choose-plan btn btn-block btn-outline-primary btn-lg" disabled>CURRENT PLAN</button>
+            <% else %>
+              <%= link_to "CHANGE PLAN", upgrade_or_downgrade_stripe_plan_path(plan: plan), :data => {:confirm => "Are you sure you want to change your plan from #{@current_user_plan.nickname} (#{number_to_currency(@current_user_plan.amount_decimal, unit: @current_user_plan.currency == 'USD' ? '$ ' : ' £ ')}) to #{plan.nickname} (#{number_to_currency(plan.amount_decimal, unit: plan.currency == 'USD' ? '$ ' : ' £ ')}) this will generate new invoice and the payment will be managed accordingly."}, method: :put, class:"btn-choose-plan btn btn-block btn-outline-primary btn-lg"  %>
+            <% end %>
+          <% else %>
+            <% if current_user.stripe_customer_id.present? && current_user.stripe_payment_method_id.present? %>
+              <%= link_to "CHOOSE PLAN", fetch_payment_details_path(plan: plan), remote: true, class:"btn-choose-plan btn btn-block btn-outline-primary btn-lg choose" %>
+            <% else %>
+              <%= link_to "CHOOSE PLAN", collect_payment_details_path(plan: plan, stripe_plan_id: plan.stripe_id, app_plan_id:  plan.id), remote: true, class:"btn-choose-plan btn btn-block btn-outline-primary btn-lg choose"  %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

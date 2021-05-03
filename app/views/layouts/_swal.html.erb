@@ -1,0 +1,33 @@
+<% if notice or  alert.present? or flash[:warning] or flash[:info].present? %>
+<script>
+      Swal.fire({
+        <% if notice %>
+          title: 'Success',
+          text: "<%= notice.html_safe %>",
+          icon: 'success',
+        <% end %>
+        <% if alert.present? %>
+          title: 'Oops!',
+          text: "<%= alert.html_safe %>",
+          icon: 'error'
+        <% end %>
+        <% if flash[:warning] %>
+          title: 'Oops!',
+          text: "<%= flash[:warning].html_safe %>",
+          icon: 'warning'
+        <% end %>
+        <% if flash[:info].present? %>
+          title: 'Success',
+          text: "<%= flash[:info].html_safe %>",
+          icon: 'success'
+        <% end %>
+        timer: 2000
+      });
+      if(window.matchMedia("(min-width: 992px)").matches){
+        setTimeout(function(){location.reload()}, 2000);
+      }
+      else{
+        $('a').attr('data-turbolinks',false);
+      }
+  </script>
+<% end %>
