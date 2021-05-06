@@ -41,12 +41,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :phone_number
       t.date :date_of_birth
       t.boolean :revoke_access, default: false
-      t.attachment :profile_pic, default: ""
+      t.attachment :profile_pic
 
       t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
+    add_index :users, :email
     add_index :users, :revoke_access
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
