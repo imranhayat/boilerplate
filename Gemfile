@@ -80,7 +80,7 @@ gem 'omniauth-facebook', '~> 8.0.0'
 gem 'omniauth-google-oauth2', '~> 1.0.0'
 gem 'omniauth-linkedin-oauth2', '~> 1.0.0'
 gem 'omniauth-twitter', '~> 1.4.0'
-gem 'paperclip', '~> 6.1.0'
+gem 'paperclip', '~> 3.5.0'
 gem 'rolify', '~> 6.0.0'
 gem 'rubocop', '~> 1.13.0', require: false
 gem 'stripe', '~> 5.32.1'
