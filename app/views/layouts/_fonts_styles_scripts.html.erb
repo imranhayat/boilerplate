@@ -16,6 +16,7 @@
 <!-- Jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" defer></script>
 
+<%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload', media: 'all' %>
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 <!-- Bootstrap Custom File Input -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bs-custom-file-input/1.3.4/bs-custom-file-input.min.js" integrity="sha512-91BoXI7UENvgjyH31ug0ga7o1Ov41tOzbMM3+RPqFVohn1UbVcjL/f5sl6YSOFfaJp+rF+/IEbOOEwtBONMz+w==" crossorigin="anonymous" defer></script>
@@ -30,7 +31,7 @@
 <!-- Datatable CSS Files -->
   <!-- PDF Make -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js" defer crossorigin="anonymous"></script>
-
+  <%= stylesheet_pack_tag 'datatables', 'data-turbolinks-track': 'reload', media: 'all' %>
   <%= javascript_pack_tag 'datatables', 'data-turbolinks-track': 'reload', defer: true %>
   <!-- DataTable JS -->
   <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer crossorigin="anonymous"></script>
@@ -63,6 +64,7 @@
 <% if notice or  alert.present? or flash[:warning] or flash[:info].present? or params[:controller] == 'subscriptions' or params[:controller] == 'plans' %>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.min.js" integrity="sha512-IHQXMp2ha/aGMPumvzKLQEs9OrPhIOaEXxQGV5vnysMtEmNNcmUqk82ywqw7IbbvrzP5R3Hormh60UVDBB98yg==" crossorigin="anonymous"></script>
+  <%= stylesheet_pack_tag 'swal', 'data-turbolinks-track': 'reload', media: 'all' %>
   <%= javascript_pack_tag 'swal', 'data-turbolinks-track': 'reload', defer: true %>
   
 
@@ -70,14 +72,14 @@
 
 <!-- If User Signed In -->
 <% if user_signed_in? %>
-
+  <%= stylesheet_pack_tag 'signed_in', 'data-turbolinks-track': 'reload', media: 'all' %>
   <%= javascript_pack_tag 'signed_in', 'data-turbolinks-track': 'reload', defer: true %>
 
 <% end %>
 
 <!-- Dashboard -->
 <% if user_signed_in? and current_user.has_role? :admin %>
-
+  <%= stylesheet_pack_tag 'dashboard', 'data-turbolinks-track': 'reload', media: 'all' %>
   <%= javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload', defer: true %>
 
 <% end %>
