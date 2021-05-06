@@ -44,7 +44,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       
       t.timestamps null: false
     end
-    add_attachment :profile_pic, :image
+    add_attachment :profile_pic
 
     add_index :users, :email
     add_index :users, :revoke_access
